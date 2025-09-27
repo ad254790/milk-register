@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<title>Milk Collection Register</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<h2>COMPANY NAME</h2>
+
+<div id="loginDiv">
+  <h3>Login</h3>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <select id="roleSelect">
+    <option value="">--Role--</option>
+    <option value="admin">Admin</option>
+    <option value="manager">Manager</option>
+    <option value="staff">Staff</option>
+  </select>
+  <br>
+  <button onclick="login()">Login</button>
+</div>
+
+<div id="appDiv" class="hidden">
+  <div>
+    <input type="text" id="newFarmer" placeholder="किसान का नाम">
+    <input type="text" id="newFarmerID" placeholder="Unique ID">
+    <button onclick="addFarmer()">किसान जोड़ें</button>
+    <button onclick="removeFarmer()">किसान हटाएँ</button>
+    <br><br>
+
+    <label>किसान चुनें:</label>
+    <select id="farmerSelect" onchange="clearTable()"></select>
+
+    <label>महीना चुनें:</label>
+    <select id="monthSelect" onchange="generateTable()">
+      <option value="">--महीना चुनें--</option>
+      <option value="Jan">जनवरी</option>
+      <option value="Feb">फरवरी</option>
+      <option value="Mar">मार्च</option>
+      <option value="Apr">अप्रैल</option>
+      <option value="May">मई</option>
+      <option value="Jun">जून</option>
+      <option value="Jul">जुलाई</option>
+      <option value="Aug">अगस्त</option>
+      <option value="Sep">सितंबर</option>
+      <option value="Oct">अक्टूबर</option>
+      <option value="Nov">नवंबर</option>
+      <option value="Dec">दिसंबर</option>
+    </select>
+
+    <label>साल दर्ज करें:</label>
+    <input type="number" id="yearInput" placeholder="2025" min="2000" max="2099">
+
+    <br>
+    <button onclick="loadData()">डेटा लोड करें</button>
+    <button onclick="saveData()">डेटा सेव करें</button>
+    <button onclick="exportToExcel()">Export Excel</button>
+  </div>
+
+  <table>
+    <tr>
+      <th>दिन</th><th>सुबह</th><th>शाम</th>
+      <th>दिन</th><th>सुबह</th><th>शाम</th>
+    </tr>
+    <tbody id="milkTable"></tbody>
+  </table>
+
+  <div class="footer">
+    Rate: <input type="number" id="rate" value="0" min="0" oninput="calculateTotal()"> <br>
+    Total Qty: <span id="totalQty">0</span>
+    <div class="result-box">
+      Total Amount = <span id="totalAmount">0</span>
+    </div>
+  </div>
+
+  <button onclick="logout()">Logout</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
